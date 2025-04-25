@@ -1,10 +1,14 @@
+import telebot
 from telebot import types
 from database import Database, Analysis
 from datetime import datetime
 import re
+from dotenv import load_dotenv
 import os
 
-bot = os.bot
+load_dotenv()
+TOKEN = os.getenv("BOT_TOKEN")
+bot = telebot.TeleBot(TOKEN)
 db = Database()
 db.create_tables_users()
 db.create_table_track()  # Создаем таблицу для трасс

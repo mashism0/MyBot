@@ -4,4 +4,4 @@ venv/
 .env
 *.db
 .vscode/
-.idea/
+.idea/__pycache__

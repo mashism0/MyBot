@@ -1,13 +1,14 @@
 import psycopg2
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 #инициализация подключения
 class Database:
     def __init__(self):
+        load_dotenv()
         self.conn = psycopg2.connect( #соединение с бд
-            dbname = "postgres_db",
-            user = "unamanzana1",
-            password = "unamanzana2",
-            host = "localhost"
+            dbname=os.getenv("dbname"), user=os.getenv("user"),
+            password=os.getenv("password"), host=os.getenv("host")
         )
         self.cursor = self.conn.cursor()  #создание курсора
         #курсор - объект для выполнения SQL - запросов и получения результатов.
@@ -131,14 +132,12 @@ class Database:
 
 class Analysis:
     def __init__(self):
+        load_dotenv()
         self.conn = psycopg2.connect( #соединение с бд
-            dbname = "postgres_db",
-            user = "unamanzana1",
-            password = "unamanzana2",
-            host = "localhost"
+            dbname=os.getenv("dbname"), user=os.getenv("user"),
+            password=os.getenv("password"), host=os.getenv("host")
         )
         self.cursor = self.conn.cursor()  #создание курсора
-        #курсор - объект для выполнения SQL - запросов и получения результатов.
     def track(self, telegram_id):
         try:
             # Проверяем существование трасс
@@ -151,7 +150,6 @@ class Analysis:
             self.cursor.execute( #соединяем 2 столбца 7 + 'A' = '7A'
                 #Подсчитываем количество каждой категории
                 #Из количества каждой категории узнаём самую популярную
-                #Из
                 """WITH days_30_track AS (
                 SELECT category_1::text || category_2 AS category
                 FROM track
